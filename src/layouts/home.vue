@@ -3,7 +3,11 @@
     <RouterView />
     <Footer />
     <div class="mt-5 mx-auto text-center opacity-75 dark:opacity-50 text-sm">
-      [Home Layout]
+      <p>
+        五月雨を<br>
+        あつめて早し<br>
+        最上川<br>
+      </p>
     </div>
   </main>
 </template>

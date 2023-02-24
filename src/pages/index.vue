@@ -1,57 +1,37 @@
 <script setup lang="ts">
-const user = useUserStore()
-const name = $ref(user.savedName)
-
-const router = useRouter()
-const go = () => {
-  if (name)
-    router.push(`/hi/${encodeURIComponent(name)}`)
+interface ColorObject {
+  primary: string[]
+  accent: string[]
+  neutral: string[]
+  semantic: string[]
+  extended?: string[]
 }
-
-const { t } = useI18n()
+const colors = reactive<ColorObject>({
+  primary: ['#074CC2', '#2F75ED', '#2F75ED'],
+  accent: ['#A17210', '#FFC64D', '#EDB02F'],
+  neutral: ['#f8f9fa', '#e9ecef', '#dee2e6', '#ced4da', '#6c757d', '#6c757d', '#6c757d', '#495057', '#343a40', '#212529'],
+  semantic: ['#ffbe0b', '#fb5607', '#ff006e', '#8338ec', '#3a86ff'],
+  extended: ['#2AAFDE', '#3BF5DF', '#2ADE81', '#30FA41'],
+})
+const completeFullTitle = (no: number, category: string) => {
+  return `${no} - ${category.charAt(0).toUpperCase() + category.slice(1)} Colors`
+}
 </script>
 
 <template>
-  <div>
-    <div text-4xl>
-      <div i-carbon-campsite inline-block />
-    </div>
-    <p>
-      <a rel="noreferrer" href="https://github.com/antfu/vitesse" target="_blank">
-        Vitesse
-      </a>
-    </p>
-    <p>
-      <em text-sm opacity-75>{{ t('intro.desc') }}</em>
-    </p>
-
-    <div py-4 />
-
-    <input
-      id="input"
-      v-model="name"
-      :placeholder="t('intro.whats-your-name')"
-      :aria-label="t('intro.whats-your-name')"
-      type="text"
-      autocomplete="false"
-      p="x4 y2"
-      w="250px"
-      text="center"
-      bg="transparent"
-      border="~ rounded gray-200 dark:gray-700"
-      outline="none active:none"
-      @keydown.enter="go"
-    >
-    <label class="hidden" for="input">{{ t('intro.whats-your-name') }}</label>
-
-    <div>
-      <button
-        btn m-3 text-sm
-        :disabled="!name"
-        @click="go"
-      >
-        {{ t('button.go') }}
-      </button>
+  <div class="index p-5">
+    <h1>Colors Showcase</h1>
+    <h2>{{ completeFullTitle(1, 'primary') }}</h2>
+    <ColorChunk :data="colors.primary" />
+    <h2>{{ completeFullTitle(2, 'accent') }}</h2>
+    <ColorChunk :data="colors.accent" />
+    <h2>{{ completeFullTitle(3, 'neutral') }}</h2>
+    <ColorChunk :data="colors.neutral" />
+    <h2>{{ completeFullTitle(4, 'semantic') }}</h2>
+    <ColorChunk :data="colors.semantic" />
+    <div v-if="colors.extended">
+      <h2>{{ completeFullTitle(5, 'extended') }}</h2>
+      <ColorChunk :data="colors?.extended" />
     </div>
   </div>
 </template>
@@ -60,3 +40,7 @@ const { t } = useI18n()
 meta:
   layout: home
 </route>
+
+<style scoped>
+
+</style>
