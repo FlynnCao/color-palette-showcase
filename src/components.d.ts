@@ -10,8 +10,11 @@ declare module '@vue/runtime-core' {
     ColorChunk: typeof import('./components/ColorChunk.vue')['default']
     Counter: typeof import('./components/Counter.vue')['default']
     Footer: typeof import('./components/Footer.vue')['default']
+    Header: typeof import('./components/Header.vue')['default']
+    IconText: typeof import('./components/IconText.vue')['default']
     README: typeof import('./components/README.md')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    UnoIconText: typeof import('./components/UnoIconText.vue')['default']
   }
 }
